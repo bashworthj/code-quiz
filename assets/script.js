@@ -13,7 +13,7 @@ var questions = [{
     options:["yes", "no", "maybe"],
     correct:"no"
 },{
-    thequestion:"In baseball,how many strikes are in an out?",
+    thequestion:"In baseball, how many strikes are in an out?",
     options:["one", "two", "three"],
     correct:"three"
 },{
@@ -28,19 +28,28 @@ var homeEl = document.getElementById("home");
 var quizEl = document.getElementById("quiz");
 var endEl = document.getElementById("end");
 var startBtn = document.getElementById("startBtn");
-// var quizTitle = document.getElementById("title");
+var multipleChoice = document.querySelectorAll("button.multipleChoice")
+var quizQuestion = document.getElementById("theQuestion");
+var btnA = document.getElementById("btnA");
+var btnB = document.getElementById("btnB");
+var btnC = document.getElementById("btnC");
+var questionPosition = 0;
 var userScore =0;
 var timeLeft = 0;
 var timer;
 // var state = "start";
 
 
+HomeState();
+
 function HomeState(){
     homeEl.style.display = "block";
     quizEl.style.display = "none";
     endEl.style.display = "none";
-    
 }
+
+
+
 function questionState(){
    
     homeEl.style.display = "none";
@@ -57,26 +66,54 @@ function begin() {
         startTime--;
         document.textContent = timeLeft;
         document.getElementById("secondsLeft").textContent = startTime;
-        // if (timeLeft <= 0) {
-        //     clearInterval(timer);
-        //     endGame(); 
-        // }
+        if (startTime <= 0) {
+            clearInterval(timer);
+            endGame(); 
+        }
     }, 1000);
 
     newQuestion();
 }
 
-
-function correct() {
-    score += 20;
-    newQuestion();
+function endGame(){
+    homeEl.style.display = "none";
+    quizEl.style.display = "none";
+    endEl.style.display = "block";
 }
-    
-// function newQuestion(){
-//     homeEl.style.display = "none";
-//     quizEl.style.display = 'block';
-//     endEl.style.display = "none";
+// function correct() {
+//     score += 20;
+//     newQuestion();
 // }
+function lastQuestion(){
+    homeEl.style.display = "none";
+    quizEl.style.display = 'block';
+    endEl.style.display = "none";
+
+
+    quizQuestion.textContent = questions[4].thequestion;
+    btnA.textContent = questions[4].options[0];
+    btnB.textContent = questions[4].options[1];
+    btnC.textContent = questions[4].options[2];
+   }
+
+
+function newQuestion(){
+    homeEl.style.display = "none";
+    quizEl.style.display = 'block';
+    endEl.style.display = "none";
+
+    
+    quizQuestion.textContent = questions[questionPosition].thequestion;
+    btnA.textContent = questions[questionPosition].options[0];
+    btnB.textContent = questions[questionPosition].options[1];
+    btnC.textContent = questions[questionPosition].options[2];
+    questionPosition++;
+        if(questionPosition === questions.length){
+            lastQuestion();
+        }
+    };
+    
+
 
 // function displayState() {
 //     if (state === 'start') {
@@ -96,18 +133,39 @@ function correct() {
 //     }
 //   }
 
-
-
 startBtn.addEventListener("click", function(){
     // newQuestion();
     questionState();
-}
+})    
+
+
+btnA.addEventListener("click", function(){
+    if(quizQuestion.textContent == questions[4].thequestion){
+         endGame();
+        } else {
+            newQuestion();}
+   
+});
+
+    
+btnB.addEventListener("click", function(){
+    newQuestion();
+});
+
+    
+btnC.addEventListener("click", function(){
+    newQuestion();
+});
+
+multipleChoice.addEventListener("click", function(){
+    newQuestion();
+})
+
 //   state = 'quiz';
   
-);
+
 
 // quizTitle.addEventListener("click", function () {
 //   state = 'end';
 //   displayState();
 // });
-HomeState();

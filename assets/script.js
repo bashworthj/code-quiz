@@ -26,6 +26,7 @@ var questions = [{
 
 var homeEl = document.getElementById("home");
 var quizEl = document.getElementById("quiz");
+var questionEl = document.getElementById("questions");
 var endEl = document.getElementById("end");
 var startBtn = document.getElementById("startBtn");
 var multipleChoice = document.querySelectorAll("button.multipleChoice")
@@ -35,6 +36,7 @@ var btnB = document.getElementById("btnB");
 var btnC = document.getElementById("btnC");
 var questionPosition = 0;
 var userScore =0;
+var startTime = 0;
 // var timeLeft = 0;
 var timer;
 // var state = "start";
@@ -79,6 +81,7 @@ function endGame(){
     homeEl.style.display = "none";
     quizEl.style.display = "none";
     endEl.style.display = "block";
+    console.log(userScore);
 }
 // function correct() {
 //     score += 20;
@@ -107,7 +110,7 @@ function newQuestion(){
     btnA.textContent = questions[questionPosition].options[0];
     btnB.textContent = questions[questionPosition].options[1];
     btnC.textContent = questions[questionPosition].options[2];
-    questionPosition++;
+    
         if(questionPosition === questions.length){
             lastQuestion();
         }
@@ -133,55 +136,55 @@ function newQuestion(){
 //     }
 //   }
 
-startBtn.addEventListener("click", function(){
-    // newQuestion();
-    questionState();
-})    
 
-function clickA(){
+
+function checkA(){
+    if(questions[questionPosition].correct == 
+        questions[questionPosition].options[0]){
+            console.log("hi");
+    }       
 
 }
 function clickB(){
+    if(questions[questionPosition].correct == 
+        questions[questionPosition].options[1]){
+            console.log("hi");
+    }   
     
 }
 function clickC(){
+    if(questions[questionPosition].correct == 
+        questions[questionPosition].options[2]){
+            console.log("hi");
+    }   
+    
     
 }
 
+startBtn.addEventListener("click", function(){
+    questionState();
+});    
 
-btnA.addEventListener("click", function(){
+questionEl.addEventListener("click", function(event){
+    var element = event.target 
+    if(element.matches("button")){
+        if(questions[questionPosition].correct === 
+            element.textContent){
+                userScore += 5;
+            } if(questions[questionPosition].correct !== 
+                element.textContent){
+                startTime-=5;
+            }
+                
+          
+    }
     if(quizQuestion.textContent == questions[4].thequestion){
          endGame();
         } else {
+            questionPosition++;
             newQuestion();}
-   
+            
+    
 });
 
     
-btnB.addEventListener("click", function(){
-    if(quizQuestion.textContent == questions[4].thequestion){
-        alert("try again");
-    } else{
-    newQuestion();}
-});
-
-    
-btnC.addEventListener("click", function(){
-    if(quizQuestion.textContent == questions[4].thequestion){
-        alert("try again");
-    } else{
-    newQuestion();}
-});
-
-// multipleChoice.addEventListener("click", function(){
-//     newQuestion();
-// })
-
-//   state = 'quiz';
-  
-
-
-// quizTitle.addEventListener("click", function () {
-//   state = 'end';
-//   displayState();
-// });

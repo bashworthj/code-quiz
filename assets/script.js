@@ -35,7 +35,7 @@ var btnB = document.getElementById("btnB");
 var btnC = document.getElementById("btnC");
 var questionPosition = 0;
 var userScore =0;
-var timeLeft = 0;
+// var timeLeft = 0;
 var timer;
 // var state = "start";
 
@@ -64,7 +64,7 @@ function begin() {
     document.getElementById("secondsLeft").textContent = startTime;
     var timer = setInterval(function() {
         startTime--;
-        document.textContent = timeLeft;
+        
         document.getElementById("secondsLeft").textContent = startTime;
         if (startTime <= 0) {
             clearInterval(timer);
@@ -138,6 +138,16 @@ startBtn.addEventListener("click", function(){
     questionState();
 })    
 
+function clickA(){
+
+}
+function clickB(){
+    
+}
+function clickC(){
+    
+}
+
 
 btnA.addEventListener("click", function(){
     if(quizQuestion.textContent == questions[4].thequestion){
@@ -149,17 +159,23 @@ btnA.addEventListener("click", function(){
 
     
 btnB.addEventListener("click", function(){
-    newQuestion();
+    if(quizQuestion.textContent == questions[4].thequestion){
+        alert("try again");
+    } else{
+    newQuestion();}
 });
 
     
 btnC.addEventListener("click", function(){
-    newQuestion();
+    if(quizQuestion.textContent == questions[4].thequestion){
+        alert("try again");
+    } else{
+    newQuestion();}
 });
 
-multipleChoice.addEventListener("click", function(){
-    newQuestion();
-})
+// multipleChoice.addEventListener("click", function(){
+//     newQuestion();
+// })
 
 //   state = 'quiz';
   

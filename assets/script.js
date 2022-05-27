@@ -30,6 +30,7 @@ var quizEl = document.getElementById("quiz");
 var questionEl = document.getElementById("questions");
 var endEl = document.getElementById("end");
 var scoreEl = document.getElementById("scorePage");
+var hiEl =document.getElementById("hiPage");
 var startBtn = document.getElementById("startBtn");
 var userInitial = document.getElementById("userInitial");
 var quizQuestion = document.getElementById("theQuestion");
@@ -51,6 +52,8 @@ function HomeState() {
     quizEl.style.display = "none";
     endEl.style.display = "none";
     scoreEl.style.display = "none";
+    hiEl.style.display = "none";
+    userScore = 0
 }
 
 
@@ -61,6 +64,7 @@ function questionState() {
     quizEl.style.display = "block";
     endEl.style.display = "none";
     scoreEl.style.display = "none";
+    hiEl.style.display = "none";
     begin();
 
 
@@ -87,6 +91,7 @@ function newQuestion() {
     quizEl.style.display = 'block';
     endEl.style.display = "none";
     scoreEl.style.display = "none";
+    hiEl.style.display = "none";
 
 
     quizQuestion.textContent = questions[questionPosition].thequestion;
@@ -104,6 +109,7 @@ function lastQuestion() {
     quizEl.style.display = 'block';
     endEl.style.display = "none";
     scoreEl.style.display = "none";
+    hiEl.style.display = "none";
 
 
     quizQuestion.textContent = questions[4].thequestion;
@@ -117,6 +123,7 @@ function endGame() {
     quizEl.style.display = "none";
     endEl.style.display = "block";
     scoreEl.style.display = "block";
+    hiEl.style.display = "none";
     clearInterval(timer);
     document.getElementById("userScore").textContent = userScore;
     
@@ -127,6 +134,7 @@ function scoreState(){
     quizEl.style.display = "none";
     endEl.style.display = "none";
     scoreEl.style.display = "block";
+    hiEl.style.display = "block";
     console.log(userInitial.value);
     console.log(userScore);
     saveFingScores();
@@ -153,9 +161,13 @@ function saveFingScores(){
 };
 savedScores.push(statBoard);
 console.log(savedScores);
+document.getElementById("highScores").textContent = JSON.stringify(savedScores);
 
 }
 
+function displayScores(){
+
+}
 
 
 
@@ -209,3 +221,10 @@ endEl.addEventListener("click", function (event) {
 }}
        
 );  
+
+hiEl.addEventListener("click", function (event){
+    var element3 = event.target
+    if(element3.matches("button")){
+        HomeState();
+    }
+});

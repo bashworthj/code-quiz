@@ -80,7 +80,7 @@ function begin() {
         if (startTime <= 0) {
             endGame();
             clearInterval(timer);
-            // endGame();
+            
         }
     }, 1000);
 
@@ -125,7 +125,7 @@ function endGame() {
     endEl.style.display = "block";
     scoreEl.style.display = "block";
     hiEl.style.display = "none";
-    clearInterval(timer);
+    startTime = 0;
     document.getElementById("userScore").textContent = userScore;
 
 }

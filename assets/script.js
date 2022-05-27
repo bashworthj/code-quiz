@@ -1,3 +1,5 @@
+// created an area of objects so i can then fill desired areas with content of a said index position
+
 var questions = [{
     thequestion: "Can I figure out this assignment?",
     options: ["yes", "no", "maybe"],
@@ -23,14 +25,14 @@ var questions = [{
     correct: "yes"
 },];
 
-
+// declared all my variables. this allowed me to delegate states and assign operation to html elements
 
 var homeEl = document.getElementById("home");
 var quizEl = document.getElementById("quiz");
 var questionEl = document.getElementById("questions");
 var endEl = document.getElementById("end");
 var scoreEl = document.getElementById("scorePage");
-var hiEl =document.getElementById("hiPage");
+var hiEl = document.getElementById("hiPage");
 var startBtn = document.getElementById("startBtn");
 var userInitial = document.getElementById("userInitial");
 var quizQuestion = document.getElementById("theQuestion");
@@ -43,7 +45,7 @@ var userScore = 0;
 var startTime = 0;
 var timer;
 
-
+// all of page states and my timer function
 
 HomeState();
 
@@ -55,8 +57,6 @@ function HomeState() {
     hiEl.style.display = "none";
     userScore = 0
 }
-
-
 
 function questionState() {
 
@@ -78,8 +78,7 @@ function begin() {
         document.getElementById("secondsLeft").textContent = startTime;
         if (startTime <= 0) {
             clearInterval(timer);
-            
-            
+            scoreScreen();
         }
     }, 1000);
 
@@ -93,7 +92,7 @@ function newQuestion() {
     scoreEl.style.display = "none";
     hiEl.style.display = "none";
 
-
+    // filling desired area with content found from array
     quizQuestion.textContent = questions[questionPosition].thequestion;
     btnA.textContent = questions[questionPosition].options[0];
     btnB.textContent = questions[questionPosition].options[1];
@@ -126,68 +125,49 @@ function endGame() {
     hiEl.style.display = "none";
     clearInterval(timer);
     document.getElementById("userScore").textContent = userScore;
-    
+
 }
 
-
-function scoreScreen(){
+function scoreScreen() {
     homeEl.style.display = "none";
     quizEl.style.display = "none";
     endEl.style.display = "none";
     scoreEl.style.display = "block";
     hiEl.style.display = "block";
     saveFingScores();
-   
+
 }
-// function saveScoresToLocal(event){
-//     event.preventDefault();
-//     var savedScore = localStorage.getItem("high score" || []);
-//     var aryOfScores = [];
-//     aryOfScores = JSON.parse(savedScore);
-//     var strOfScores = JSON.stringify(aryOfScores);
-//     window.localStorage.setItem("high scores", strOfScores);
-    
-    // aryOfScores.push(userScore);
-    // console.log(aryOfScores);
 
-
-// }
-
-function saveFingScores(){
+// This is the function i used to save my score and initials to local storage as well as
+// displaying ot the screen
+function saveFingScores() {
     var savedScores = JSON.parse(localStorage.getItem("previousScores")) || [];
     console.log(savedScores);
-    
-  
+
+
     var statBoard = {
         initials: userInitial.value,
         score: userScore
-};
-savedScores.push(statBoard);
-console.log(statBoard);
-var strOfScores = JSON.stringify(savedScores);
-console.log(strOfScores);
-window.localStorage.setItem("previous", strOfScores);
+    };
+    savedScores.push(statBoard);
+    console.log(statBoard);
+    var strOfScores = JSON.stringify(savedScores);
+    console.log(strOfScores);
+    window.localStorage.setItem("previous", strOfScores);
 
-document.getElementById("highScores").textContent = strOfScores;
+    document.getElementById("highScores").textContent = strOfScores;
 
 }
 
-
-
-
-
-
-
-
-
-
-
+// all of my Event Listeners, all but one delegate state
 startBtn.addEventListener("click", function () {
     questionState();
 });
 
 
-
+// this delegates state as well but it also checks users selection with correct answer 
+// found in Array. It then either adds to score ore takes away from time based on a 
+// correct or incorerct answer
 questionEl.addEventListener("click", function (event) {
     var element = event.target
     if (element.matches("button")) {
@@ -198,10 +178,8 @@ questionEl.addEventListener("click", function (event) {
             element.textContent) {
             startTime -= 5;
         }
-    // if(btnA.textContent = questions[4].options[0]){
-    //     clearInterval(timer);
 
-       
+
 
     }
     if (quizQuestion.textContent == questions[4].thequestion) {
@@ -218,17 +196,18 @@ questionEl.addEventListener("click", function (event) {
 endEl.addEventListener("click", function (event) {
     var element2 = event.target
     if (element2.matches("button")) {
-        
-      
 
-      scoreScreen();
-}}
-       
-);  
 
-hiEl.addEventListener("click", function (event){
+
+        scoreScreen();
+    }
+}
+
+);
+
+hiEl.addEventListener("click", function (event) {
     var element3 = event.target
-    if(element3.matches("button")){
+    if (element3.matches("button")) {
         HomeState();
     }
 });

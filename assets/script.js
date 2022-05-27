@@ -56,6 +56,7 @@ function HomeState() {
     scoreEl.style.display = "none";
     hiEl.style.display = "none";
     userScore = 0
+    questionPosition = 0;
 }
 
 function questionState() {
@@ -77,8 +78,9 @@ function begin() {
 
         document.getElementById("secondsLeft").textContent = startTime;
         if (startTime <= 0) {
+            endGame();
             clearInterval(timer);
-            scoreScreen();
+            // endGame();
         }
     }, 1000);
 

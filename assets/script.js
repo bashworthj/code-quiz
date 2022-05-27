@@ -39,7 +39,7 @@ var btnB = document.getElementById("btnB");
 var btnC = document.getElementById("btnC");
 var questionPosition = 0;
 var userScore = 0;
-var finalScore;
+
 var startTime = 0;
 var timer;
 
@@ -129,15 +129,15 @@ function endGame() {
     
 }
 
-function scoreState(){
+
+function scoreScreen(){
     homeEl.style.display = "none";
     quizEl.style.display = "none";
     endEl.style.display = "none";
     scoreEl.style.display = "block";
     hiEl.style.display = "block";
-    console.log(userInitial.value);
-    console.log(userScore);
     saveFingScores();
+   
 }
 // function saveScoresToLocal(event){
 //     event.preventDefault();
@@ -154,20 +154,24 @@ function scoreState(){
 // }
 
 function saveFingScores(){
-    var savedScores = JSON.parse(localStorage.getItem("previousscores")) || [];
+    var savedScores = JSON.parse(localStorage.getItem("previousScores")) || [];
+    console.log(savedScores);
+    
+  
     var statBoard = {
         initials: userInitial.value,
         score: userScore
 };
 savedScores.push(statBoard);
-console.log(savedScores);
-document.getElementById("highScores").textContent = JSON.stringify(savedScores);
+console.log(statBoard);
+var strOfScores = JSON.stringify(savedScores);
+console.log(strOfScores);
+window.localStorage.setItem("previous", strOfScores);
+
+document.getElementById("highScores").textContent = strOfScores;
 
 }
 
-function displayScores(){
-
-}
 
 
 
@@ -217,7 +221,7 @@ endEl.addEventListener("click", function (event) {
         
       
 
-      scoreState();
+      scoreScreen();
 }}
        
 );  

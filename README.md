@@ -12,7 +12,7 @@
 After the user is finshed with the quiz, they can then submit their initials and view the previous scores and who scored them(defined by initials).
 
 ## Visuals
-![Screen Shot]()
+![Screen Shot](assets/CodeQuiz.png)
 
 ## Authors and Acknowledgement
 - Ben Ashworth

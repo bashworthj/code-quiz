@@ -155,7 +155,7 @@ function saveFingScores() {
     console.log(statBoard);
     var strOfScores = JSON.stringify(savedScores);
     console.log(strOfScores);
-    window.localStorage.setItem("previous", strOfScores);
+    window.localStorage.setItem("previousScores", strOfScores);
 
     document.getElementById("highScores").textContent = strOfScores;
 
